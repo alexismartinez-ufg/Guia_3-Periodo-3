@@ -1,0 +1,33 @@
+﻿@model Ejercicio_1.DAL.Models.Contacto
+
+@{
+    ViewBag.Title = "Detalles del Contacto";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header text-center bg-light">
+            <h4 class="card-title text-danger">Detalles del Contacto</h4>
+        </div>
+
+        <div class="card-body">
+            <h5 class="text-center">Información del Contacto a Eliminar</h5>
+
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><strong>ID:</strong> @Model.IdContacto</li>
+                <li class="list-group-item"><strong>Nombres:</strong> @Model.Nombres</li>
+                <li class="list-group-item"><strong>Apellidos:</strong> @Model.Apellidos</li>
+                <li class="list-group-item"><strong>Teléfono:</strong> @Model.Telefono</li>
+                <li class="list-group-item"><strong>Correo Electrónico:</strong> @Model.Correo</li>
+            </ul>
+
+            <h5 class="text-secondary text-center">¿Estás seguro de que deseas eliminar este contacto?</h5>
+
+            <form asp-action="Delete" asp-controller="Contacto" method="post" class="mt-3 text-center">
+                <input type="hidden" name="id" value="@Model.IdContacto">
+                <button type="submit" class="btn btn-outline-danger">Sí, Eliminar</button>
+                <a href="@Url.Action("Index", "Contacto")" class="btn btn-outline-secondary">No, Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

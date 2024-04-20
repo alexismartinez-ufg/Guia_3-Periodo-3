@@ -1,0 +1,59 @@
+﻿
+@model List<Ejercicio_1.DAL.Models.Contacto>
+
+@{
+    ViewData["Title"] = "Listado de Contactos";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header text-center bg-light mb-2 mt-2">
+            <h4 class="card-title text-dark">Listado de Contactos</h4>
+        </div>
+        <div class="card-body text-end">
+            <a href="@Url.Action("Create", "Contacto")" class="btn btn-outline-primary">Agregar Contacto</a>
+        </div>
+        <div class="card-body text-center">
+
+            @if (Model == null || !Model.Any())
+            {
+                <p>No hay contactos guardados</p>
+            }
+            else
+            {
+                <div class="table-responsive rounded">
+                    <table class="table table-stripped">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                var contacto = Model[i];
+                                var rowClass = (i % 2 == 0) ? "bg-white" : "bg-light";
+                                <tr class="@rowClass">
+                                    <td>@contacto.IdContacto</td>
+                                    <td>@contacto.Nombres</td>
+                                    <td>@contacto.Apellidos</td>
+                                    <td>@contacto.Telefono</td>
+                                    <td>@contacto.Correo</td>
+                                    <td>
+                                        <a href="@Url.Action("Edit", "Contacto", new { id = contacto.IdContacto })" class="btn btn-sm btn-outline-warning">Editar</a>
+                                        <a href="@Url.Action("Detail", "Contacto", new { id = contacto.IdContacto })" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
